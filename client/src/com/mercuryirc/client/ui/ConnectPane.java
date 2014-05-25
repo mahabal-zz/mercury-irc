@@ -1,7 +1,6 @@
 package com.mercuryirc.client.ui;
 
 import com.mercuryirc.client.Mercury;
-import com.mercuryirc.client.misc.Settings;
 import com.mercuryirc.client.ui.misc.FontAwesome;
 import com.mercuryirc.model.Server;
 import com.mercuryirc.model.User;
@@ -19,15 +18,15 @@ public class ConnectPane extends VBox {
 
 	private final ConnectStage stage;
 
-	private TextField netName = new TextField(Settings.get("default-network-name"));
-	private TextField netHost = new TextField(Settings.get("default-network-host"));
-	private TextField netPort = new TextField(Settings.get("default-network-port"));
+	private TextField netName = new TextField();
+	private TextField netHost = new TextField();
+	private TextField netPort = new TextField();
 	private TextField netPass = new PasswordField();
 	private CheckBox netSsl = new CheckBox();
 
-	private TextField userNick = new TextField(Settings.get("default-user-nickname"));
-	private TextField userUser = new TextField(Settings.get("default-user-username"));
-	private TextField userReal = new TextField(Settings.get("default-user-real-name"));
+	private TextField userNick = new TextField();
+	private TextField userUser = new TextField();
+	private TextField userReal = new TextField();
 	private TextField userPass = new PasswordField();
 
 	public ConnectPane(final ConnectStage stage) {
@@ -40,9 +39,9 @@ public class ConnectPane extends VBox {
 		center.setId("center");
 		center.getChildren().addAll(
 				createHeader("network", true),
-				createField("Name", "", netName),
-				createField("Host", "", netHost),
-				createField("Port", "", netPort),
+				createField("Name", "Freenode", netName),
+				createField("Host", "irc.freenode.net", netHost),
+				createField("Port", String.valueOf(DEFAULT_PORT), netPort),
 				createField("Password", "", netPass),
 				createField("SSL", "", netSsl),
 
@@ -52,12 +51,6 @@ public class ConnectPane extends VBox {
 				createField("Real name", "mercury", userReal),
 				createField("Password", "", userPass)
 		);
-
-
-		netSsl.setSelected(Boolean.parseBoolean(Settings.get("default-network-ssl")));
-
-		userPass.setText(Settings.get("default-user-password"));
-
 		Button connectButton = new Button("connect");
 		connectButton.getStyleClass().add("blue");
 		connectButton.setId("connect-button");
@@ -67,29 +60,11 @@ public class ConnectPane extends VBox {
 				Server server = new Server(netName.getText(), netHost.getText(), netPort.getText().equals("")
                         ? DEFAULT_PORT : Integer.parseInt(netPort.getText()), netPass.getText().equals("") ?
                         null : netPass.getText(), netSsl.isSelected());
-
 				User user = new User(server, userNick.getText(), userUser.getText(), userReal.getText());
 				if (!userPass.getText().equals("")) {
 					user.setNickservPassword(userPass.getText());
 				}
-
-				//TODO: Actually make a network manager to store multiple networks
-				Settings.set("default-network-name", netName.getText());
-				Settings.set("default-network-host", netHost.getText());
-				Settings.set("default-network-port", netPort.getText());
-				Settings.set("default-network-password", netPass.getText());
-				Settings.set("default-network-ssl", String.valueOf(netSsl.isSelected()));
-
-				Settings.set("default-user-nickname", userNick.getText());
-				Settings.set("default-user-username", userUser.getText());
-				Settings.set("default-user-real-name", userReal.getText());
-				Settings.set("default-user-password", userPass.getText());
-
-
-
 				Mercury.connect(server, user);
-
-
 				stage.close();
 			}
 		});
