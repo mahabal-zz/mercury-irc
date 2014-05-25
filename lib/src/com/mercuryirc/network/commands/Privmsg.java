@@ -18,7 +18,10 @@ public class Privmsg implements Connection.CommandHandler {
 		String cmd = parts[1];
 		String to = parts[2];
 
-		String text = line.substring(line.indexOf(':', 1) + 1);
+		//IPv6 addresses broke this lol.
+		//String text = line.substring(line.indexOf(':', 1) + 1);
+
+		String text = line.substring(line.indexOf(parts[3]) + 1);
 
 		Server server = connection.getServer();
 		User source = server.getUser(from);
