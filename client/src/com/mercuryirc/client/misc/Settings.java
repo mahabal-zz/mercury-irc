@@ -42,7 +42,9 @@ public class Settings {
 	}
 
 	public static String get(String key) {
-		return properties.getProperty(key);
+		if (properties.containsKey(key))
+			return properties.getProperty(key);
+		return "";
 	}
 
 	public static void set(String key, String value) {
