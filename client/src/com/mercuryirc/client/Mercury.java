@@ -133,6 +133,7 @@ public class Mercury extends Application {
 		}
 		json.add("connections", connectionsArray);
 		Settings.set("connections", gson.toJson(json));
+        Settings.save();
 	}
 
 	private void loadConnections() {
