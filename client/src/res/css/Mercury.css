@@ -67,8 +67,8 @@
 	-fx-border-color: border-color;
 	-fx-text-fill: control-color;
 	-fx-font-size: 16pt;
-	-fx-border-radius: 3px;
-	-fx-background-radius: 3px;
+    -fx-background-insets: 0,1,2,3;
+    -fx-background-radius: 3,2,2,2;
 	-fx-padding: 0px;
 }
 
