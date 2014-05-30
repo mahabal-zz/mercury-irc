@@ -36,11 +36,11 @@ public class UserPane extends VBox {
 
 	public UserPane(ApplicationPane appPane, Entity entity) {
 		this.appPane = appPane;
-		setMinWidth(175);
-		setMaxWidth(175);
+		setMinWidth(185);
+		setMaxWidth(185);
 		userListView = new ListView<>();
-		userListView.setMinWidth(175);
-		userListView.setMaxWidth(175);
+		userListView.setMinWidth(185);
+		userListView.setMaxWidth(185);
 		if (entity instanceof Channel) {
 			channel = (Channel) entity;
 			userListView.getItems().addAll(channel.getUsers());
@@ -128,8 +128,8 @@ public class UserPane extends VBox {
 								}
 								Label ranklabel = new Label(rankName);
 								ranklabel.setId("rank-label");
-								ranklabel.setMinWidth(60);
-								ranklabel.setMaxWidth(60);
+								ranklabel.setMinWidth(50);
+								ranklabel.setMaxWidth(50);
 								hbox.getChildren().add(ranklabel);
 								rankLabeledCell = true;
 							}
@@ -140,8 +140,8 @@ public class UserPane extends VBox {
 				}
 				if (!rankLabeledCell) {
 					Region spacer = new Region();
-					spacer.setMinWidth(60);
-					spacer.setMaxWidth(60);
+					spacer.setMinWidth(50);
+					spacer.setMaxWidth(50);
 					hbox.getChildren().add(spacer);
 				}
 			}
