@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import netscape.javascript.JSObject;
+import org.jruby.RubyProcess;
 
 import java.awt.Desktop;
 import java.io.IOException;
@@ -68,9 +69,13 @@ public class MessagePane extends VBox {
 	@SuppressWarnings("unused")
 	public void openUrl(String url) {
 		try {
-			Desktop.getDesktop().browse(new URI(url));
-		} catch (URISyntaxException | IOException e) {
-			e.printStackTrace();
+            if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().browse(new URI(url));
+            } else {
+                Runtime.getRuntime().exec("google-chrome " + url);
+            }
+		} catch (Throwable t) {
+			t.printStackTrace();
 		}
 	}
 
@@ -78,7 +83,8 @@ public class MessagePane extends VBox {
 		if (pageLoaded) {
 			webView.getEngine().executeScript(String.format("addRow('%s', '%s', '%s', '%s')", message.getSource(), message.getMessage(), TIME_FORMATTER.format(new Date()), message.getType().style()));
 			Tab selected = appPane.getTabPane().getSelected();
-			if (selected != null && !selected.equals(tab)) {
+			if ((message.getType() == MessageRow.Type.PRIVMSG || message.getType() == MessageRow.Type.HIGHLIGHT) &&
+                    selected != null && !selected.equals(tab)) {
 				tab.setUnread(true);
 			}
 		} else {
