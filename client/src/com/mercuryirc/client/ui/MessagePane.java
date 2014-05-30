@@ -72,7 +72,7 @@ public class MessagePane extends VBox {
             if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().browse(new URI(url));
             } else {
-                Runtime.getRuntime().exec("google-chrome " + url);
+                Runtime.getRuntime().exec("xdg-open " + url);
             }
 		} catch (Throwable t) {
 			t.printStackTrace();
