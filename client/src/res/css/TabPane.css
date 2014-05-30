@@ -3,23 +3,41 @@
     -fx-border-color: border-color;
     -fx-border-width: 0px 0px 0px 0px;
     -fx-padding: 0px 20px 0px 20px;
-    -fx-font-size: 24pt;
+    -fx-font-size: 14pt;
     -fx-text-fill: control-color;
 }
 
 .list-cell .network {
     -fx-padding: 5px 0px 0px 0px;
     -fx-border-width: 1px 0px 0px 0px;
+    -fx-font-size: 10pt;
+}
+
+.list-cell .icon {
+    -fx-padding: 6px 0px 0px 0px;
+}
+
+
+.list-cell .name {
+    -fx-padding: 8px 0px 0px 4px;
+    -fx-background-color: transparent;
+    -fx-border-color: border-color;
+    -fx-border-width: 0px 0px 0px 0px;
     -fx-font-size: 14pt;
+    -fx-text-fill: control-color;
+}
+
+.list-cell .unread .name {
+    -fx-text-fill: unread-control-color;
 }
 
 /*for some reason it doesn't work if you combine the 2 blocks below...*/
 .list-cell .unread .network {
-    -fx-text-fill: dark-control-color;
+    -fx-text-fill: unread-control-color;
 }
 
 .list-cell .unread .network-name {
-    -fx-text-fill: dark-control-color;
+    -fx-text-fill: unread-control-color;
 }
 
 .list-cell:selected .network,
@@ -41,7 +59,7 @@
 }
 
 .list-cell .unread .icon {
-    -fx-text-fill: dark-control-color;
+    -fx-text-fill: unread-control-color;
 }
 
 .list-cell:selected .icon {
