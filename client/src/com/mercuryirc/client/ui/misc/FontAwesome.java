@@ -20,6 +20,7 @@ public class FontAwesome {
 	public static final String USER = "\uf007";
 	public static final String SIGN_OUT = "\uf08b";
 	public static final String REPLY = "\uf112";
+    public static final String EXCLAMATION = "\uf12a";
 
 	public static Button createIconButton(String iconName, String text, boolean pad, String styleClass) {
 		return createIconButton(iconName, text, pad, styleClass, null);
