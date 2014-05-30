@@ -271,9 +271,9 @@ public class TabPane extends VBox {
 					}
 				});
 				Entity entity = tab.getEntity();
-				setPrefHeight(50);
+				setPrefHeight(32);
 				if (entity instanceof Server) {
-					setPrefHeight(60);
+					setPrefHeight(40);
 					Label net = new Label("network");
 					net.getStyleClass().add("network");
 					VBox box = new VBox();
@@ -282,11 +282,17 @@ public class TabPane extends VBox {
 					box.getChildren().addAll(net, name);
 					setGraphic(box);
 				} else if (entity instanceof Channel) {
-					setGraphic(FontAwesome.createIcon(FontAwesome.COMMENTS));
-					setText(entity.getName().substring(1));
+                    final Label label = new Label(entity.getName().substring(1));
+					label.getStyleClass().add("name");
+                    final HBox box = new HBox();
+                    box.getChildren().addAll(FontAwesome.createIcon(FontAwesome.COMMENTS), label);
+                    setGraphic(box);
 				} else if (entity instanceof User) {
-					setGraphic(FontAwesome.createIcon(FontAwesome.USER));
-					setText(entity.getName());
+                    final Label label = new Label(entity.getName());
+                    label.getStyleClass().add("name");
+                    final HBox box = new HBox(1.0);
+                    box.getChildren().addAll(FontAwesome.createIcon(FontAwesome.USER), label);
+                    setGraphic(box);
 				}
 			}
 		}
@@ -300,7 +306,7 @@ public class TabPane extends VBox {
 			setAlignment(Pos.CENTER);
 			getStyleClass().add("dark-pane");
 			setId("tab-button-pane");
-			setMinHeight(85);
+			setMinHeight(75);
 			Button newButton = FontAwesome.createIconButton(FontAwesome.PLUS, "new", true, "green");
 			newButton.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
