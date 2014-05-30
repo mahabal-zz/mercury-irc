@@ -33,7 +33,7 @@ import java.util.List;
 
 public class Mercury extends Application {
 
-	public static final String WEBSITE = "https://github.com/zmansiv/mercury-irc";
+	public static final String WEBSITE = "https://github.com/mahabal/mercury-irc";
 
 	private static Stage stage;
 	private static ApplicationPane appPane;
