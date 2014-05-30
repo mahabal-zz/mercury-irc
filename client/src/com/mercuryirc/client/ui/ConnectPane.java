@@ -1,6 +1,7 @@
 package com.mercuryirc.client.ui;
 
 import com.mercuryirc.client.Mercury;
+import com.mercuryirc.client.misc.Settings;
 import com.mercuryirc.client.ui.misc.FontAwesome;
 import com.mercuryirc.model.Server;
 import com.mercuryirc.model.User;
@@ -65,7 +66,8 @@ public class ConnectPane extends VBox {
 					user.setNickservPassword(userPass.getText());
 				}
 				Mercury.connect(server, user);
-				stage.close();
+                Mercury.saveConnections();
+                stage.close();
 			}
 		});
 		getChildren().addAll(center, connectButton);

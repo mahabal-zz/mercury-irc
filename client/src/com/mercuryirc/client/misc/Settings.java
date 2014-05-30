@@ -53,8 +53,13 @@ public class Settings {
 		try {
 			File file = new File(APP_DIR, "settings.ini");
 			if (!APP_DIR.exists()) {
-				APP_DIR.mkdir();
+				if (!APP_DIR.mkdir())
+                    System.err.println("Unable to create directory!");
 			}
+            if (!file.exists()) {
+                if (!file.createNewFile())
+                    System.err.println("Unable to create file!");
+            }
 			FileOutputStream fileOutput = new FileOutputStream(file);
 			properties.store(fileOutput, "Mercury");
 			fileOutput.close();

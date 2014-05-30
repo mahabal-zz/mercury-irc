@@ -157,6 +157,7 @@ public class TabPane extends VBox {
 				select(selected);
 			}
 		}
+        Mercury.saveConnections();
 		return tab;
 	}
 
@@ -231,25 +232,30 @@ public class TabPane extends VBox {
 				}
 			}
 		}
+        Mercury.saveConnections();
 	}
 
 	private class TabClickedListener implements ChangeListener<Tab> {
 
 		public void changed(ObservableValue<? extends Tab> ov, Tab oldTab, Tab newTab) {
-			if (newTab == null) {
-				appPane.setContentPane(null);
-				return;
-			}
-			newTab.setUnread(false);
-			appPane.setContentPane(newTab.getContentPane());
-			final TextField inputField = appPane.getContentPane().getInputPane().getInputField();
-			Platform.runLater(new Runnable() {
-				public void run() {
-					inputField.requestFocus();
-					inputField.positionCaret(inputField.getText().length());
-					inputField.deselect();
-				}
-			});
+            try {
+                if (newTab == null) {
+                    appPane.setContentPane(null);
+                    return;
+                }
+                newTab.setUnread(false);
+                appPane.setContentPane(newTab.getContentPane());
+                final TextField inputField = appPane.getContentPane().getInputPane().getInputField();
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        inputField.requestFocus();
+                        inputField.positionCaret(inputField.getText().length());
+                        inputField.deselect();
+                    }
+                });
+            } catch (final NullPointerException npe) {
+                System.err.println("NPE Caught in method: TabPane.TabClickedListener#changed()");
+            }
 		}
 
 	}
@@ -290,7 +296,7 @@ public class TabPane extends VBox {
 				} else if (entity instanceof User) {
                     final Label label = new Label(entity.getName());
                     label.getStyleClass().add("name");
-                    final HBox box = new HBox(1.0);
+                    final HBox box = new HBox();
                     box.getChildren().addAll(FontAwesome.createIcon(FontAwesome.USER), label);
                     setGraphic(box);
 				}
