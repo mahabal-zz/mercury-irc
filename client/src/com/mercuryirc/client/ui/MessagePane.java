@@ -1,6 +1,7 @@
 package com.mercuryirc.client.ui;
 
 import com.mercuryirc.client.Mercury;
+import com.mercuryirc.client.misc.Notifications;
 import com.mercuryirc.client.ui.model.MessageRow;
 import com.mercuryirc.network.Connection;
 import javafx.beans.value.ChangeListener;
@@ -83,6 +84,11 @@ public class MessagePane extends VBox {
 		if (pageLoaded) {
 			webView.getEngine().executeScript(String.format("addRow('%s', '%s', '%s', '%s')", message.getSource(), message.getMessage(), TIME_FORMATTER.format(new Date()), message.getType().style()));
 			Tab selected = appPane.getTabPane().getSelected();
+            if (message.getType() == MessageRow.Type.HIGHLIGHT) {
+                if (!appPane.isFocused()) {
+                    Notifications.dispatch(message.getSource(), message.getMessage());
+                }
+            }
 			if ((message.getType() == MessageRow.Type.PRIVMSG || message.getType() == MessageRow.Type.HIGHLIGHT) &&
                     selected != null && !selected.equals(tab)) {
 				tab.setUnread(true);
