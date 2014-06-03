@@ -23,6 +23,7 @@ public class Notifications implements Constants {
                     command.add("-a");
                     command.add("'" + NAME + "'");
                     command.add("-i");
+                    //Lol this whole next line
                     command.add(IoUtils.resourceUrlAsString("client/src/res/images/icon64.png").replace("file:", ""));
                     command.add(title);
                     command.add(message);
