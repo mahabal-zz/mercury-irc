@@ -112,24 +112,24 @@ public class UserPane extends VBox {
 								String rankName = null;
 								switch (rank) {
 									case OWNER:
-										rankName = "Owner";
+										rankName = "~";
 										break;
 									case PROTECT:
-										rankName = "Admin";
+										rankName = "&";
 										break;
 									case OP:
-										rankName = "Op";
+										rankName = "@";
 										break;
 									case HALFOP:
-										rankName = "Halfop";
+										rankName = "%";
 										break;
 									case VOICE:
-										rankName = "Voice";
+										rankName = "+";
 								}
 								Label ranklabel = new Label(rankName);
 								ranklabel.setId("rank-label");
-								ranklabel.setMinWidth(50);
-								ranklabel.setMaxWidth(50);
+								ranklabel.setMinWidth(15);
+								ranklabel.setMaxWidth(15);
 								hbox.getChildren().add(ranklabel);
 								rankLabeledCell = true;
 							}
@@ -140,8 +140,8 @@ public class UserPane extends VBox {
 				}
 				if (!rankLabeledCell) {
 					Region spacer = new Region();
-					spacer.setMinWidth(50);
-					spacer.setMaxWidth(50);
+					spacer.setMinWidth(15);
+					spacer.setMaxWidth(15);
 					hbox.getChildren().add(spacer);
 				}
 			}

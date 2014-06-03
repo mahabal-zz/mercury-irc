@@ -11,7 +11,7 @@ public class Mode {
 	public static enum Type {
 
 		UNKNOWN_MODE('?', Context.USER),
-		HIDDEN('i', Context.USER), CLOAKED('x', Context.USER),
+		HIDDEN('i', Context.USER), CLOAKED('x', Context.USER), REGISTERED('r', Context.USER),
 		BAN('b', Context.CHANNEL_USER), INVITE('i', Context.CHANNEL_USER), EXCEPT('e', Context.CHANNEL_USER),
 		VOICE('v', Context.CHANNEL_USER), HALFOP('h', Context.CHANNEL_USER), OP('o', Context.CHANNEL_USER), PROTECT('a', Context.CHANNEL_USER), OWNER('q', Context.CHANNEL_USER),
 		MODERATED('m', Context.CHANNEL), SECRET('s', Context.CHANNEL);
