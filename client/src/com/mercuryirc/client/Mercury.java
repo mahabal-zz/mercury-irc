@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
-import com.mercuryirc.client.callback.CallbackImpl;
+import com.mercuryirc.client.event.CallbackImpl;
 import com.mercuryirc.client.misc.Settings;
 import com.mercuryirc.client.misc.Tray;
 import com.mercuryirc.client.ui.ApplicationPane;

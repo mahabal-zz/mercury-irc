@@ -1,4 +1,4 @@
-package com.mercuryirc.client.callback;
+package com.mercuryirc.client.event;
 
 import com.mercuryirc.client.Mercury;
 import com.mercuryirc.client.misc.Tray;

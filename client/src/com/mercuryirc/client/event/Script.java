@@ -1,4 +1,4 @@
-package com.mercuryirc.client.callback;
+package com.mercuryirc.client.event;
 
 import com.mercuryirc.network.callback.CallbackAdapter;
 import org.jruby.embed.LocalVariableBehavior;

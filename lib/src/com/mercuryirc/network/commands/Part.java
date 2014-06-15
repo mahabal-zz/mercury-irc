@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.PartEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Server;
@@ -31,7 +33,10 @@ public class Part implements Connection.CommandHandler {
 		if(parts.length > 3 && parts[3].length() > 1)
 			reason = line.substring(line.indexOf(':', 1) + 1);
 
-		connection.getCallback().onPart(connection, channel, user, reason);
+        //Create the event
+        final PartEvent evt = new PartEvent(connection, channel, user, reason);
+        MercuryEventBus.post(evt);
+
 	}
 
 }
