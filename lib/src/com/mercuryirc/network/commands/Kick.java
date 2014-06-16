@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.received.KickEvent;
+import com.mercuryirc.event.MercuryEventBus;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.User;
 import com.mercuryirc.network.Connection;
@@ -27,7 +29,8 @@ public class Kick implements Connection.CommandHandler {
 		if(parts.length > 4 && parts[4].length() > 1)
 			reason = line.substring(line.indexOf(':', 1) + 1);
 
-		connection.getCallback().onKick(connection, channel, user, reason);
+        final KickEvent event = new KickEvent(connection, channel, user, reason);
+        MercuryEventBus.post(event);
 	}
 
 }

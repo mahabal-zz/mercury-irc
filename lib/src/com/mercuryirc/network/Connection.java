@@ -1,5 +1,7 @@
 package com.mercuryirc.network;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.ErrorEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Entity;
@@ -328,8 +330,8 @@ public class Connection implements Runnable {
 					int start = input2.indexOf(" " + tokens[2]) + 1;
 					callback.onConnectionRequestOut(this, input.substring(start, start + tokens[2].length()), hostname, port, getLocalUser().getName());
 				} else {
-					callback.onError(this, "Usage: /server hostname:port network_name");
-					callback.onError(this, "e.g. /server " + server.getHost() + ":" + server.getPort() + " " + server.getName());
+                    MercuryEventBus.post(new ErrorEvent(this, "Usage: /server hostname:port network_name"));
+                    MercuryEventBus.post(new ErrorEvent(this, "e.g. /server " + server.getHost() + ":" + server.getPort() + " " + server.getName()));
 				}
 			} else if (tokens[0].equals("ctcp")) {
 				String message = tokens[2].toUpperCase();

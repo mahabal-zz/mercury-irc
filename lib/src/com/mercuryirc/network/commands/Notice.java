@@ -1,7 +1,7 @@
 package com.mercuryirc.network.commands;
 
 import com.mercuryirc.event.MercuryEventBus;
-import com.mercuryirc.event.MessageEvent;
+import com.mercuryirc.event.received.MessageEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.*;
 import com.mercuryirc.network.Connection;
@@ -30,7 +30,7 @@ public class Notice implements Connection.CommandHandler {
             event = new MessageEvent(connection, message, IrcType.CTCP);
 		} else {
 			Message message = new Message(source, target, text);
-            event = new MessageEvent(connection, message, IrcType.MESSAGE);
+            event = new MessageEvent(connection, message, IrcType.NOTICE);
 		}
 
         MercuryEventBus.post(event);

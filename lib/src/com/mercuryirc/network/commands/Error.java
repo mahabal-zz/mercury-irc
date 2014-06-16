@@ -11,6 +11,7 @@ public class Error implements Connection.CommandHandler {
 
 	@Override
 	public void process(Connection connection, String line, String[] parts) {
+
 		connection.getCallback().onError(connection, line.substring(7));
 	}
 

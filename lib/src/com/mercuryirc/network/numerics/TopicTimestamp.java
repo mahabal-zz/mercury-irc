@@ -1,5 +1,7 @@
 package com.mercuryirc.network.numerics;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.TopicEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.User;
@@ -21,7 +23,7 @@ public class TopicTimestamp implements Connection.NumericHandler {
 		Channel channel = connection.getServer().getChannel(chan);
 		channel.setTopicAuthor(author);
 		channel.setTopicTimestamp(ts);
-		connection.getCallback().onTopic(connection, channel, author, channel.getTopic());
+        MercuryEventBus.post(new TopicEvent(connection, channel, author, channel.getTopic()));
 	}
 
 }

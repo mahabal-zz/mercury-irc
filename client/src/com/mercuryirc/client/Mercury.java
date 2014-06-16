@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.google.gson.reflect.TypeToken;
-import com.mercuryirc.client.event.CallbackImpl;
+import com.mercuryirc.client.event.EventHandler;
 import com.mercuryirc.client.misc.Settings;
 import com.mercuryirc.client.misc.Tray;
 import com.mercuryirc.client.ui.ApplicationPane;
@@ -37,7 +37,7 @@ public class Mercury extends Application {
 
 	private static Stage stage;
 	private static ApplicationPane appPane;
-	private static CallbackImpl callback;
+	private static EventHandler callback;
 	private static final List<Connection> connections = new LinkedList<>();
 
 	public static void main(String[] args) {
@@ -59,7 +59,7 @@ public class Mercury extends Application {
 		stage.getIcons().add(new Image(Mercury.class.getResource("/res/images/icon32.png").toExternalForm()));
 		VBox content = new VBox();
 		content.getChildren().add(appPane = new ApplicationPane());
-		callback = new CallbackImpl(appPane);
+		callback = new EventHandler(appPane);
 		Scene scene = new Scene(content);
 		scene.setFill(null);
 		scene.getStylesheets().add(Mercury.class.getResource("/res/css/Mercury.css").toExternalForm());

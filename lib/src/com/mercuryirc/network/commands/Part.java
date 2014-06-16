@@ -1,7 +1,7 @@
 package com.mercuryirc.network.commands;
 
 import com.mercuryirc.event.MercuryEventBus;
-import com.mercuryirc.event.PartEvent;
+import com.mercuryirc.event.received.PartEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Server;

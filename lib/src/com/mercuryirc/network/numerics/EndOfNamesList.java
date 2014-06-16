@@ -1,5 +1,7 @@
 package com.mercuryirc.network.numerics;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.NickListEvent;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Server;
 import com.mercuryirc.network.Connection;
@@ -19,6 +21,6 @@ public class EndOfNamesList implements Connection.NumericHandler {
 		Server srv = connection.getServer();
 		Channel channel = srv.getChannel(parts[3]);
 
-		connection.getCallback().onNickList(connection, channel, channel.getUsers());
+        MercuryEventBus.post(new NickListEvent(connection, channel, channel.getUsers()));
 	}
 }

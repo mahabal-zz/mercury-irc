@@ -1,5 +1,7 @@
 package com.mercuryirc.network.numerics;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.ErrorEvent;
 import com.mercuryirc.network.Connection;
 import javafx.application.Platform;
 
@@ -13,6 +15,9 @@ public class NickInUse implements Connection.NumericHandler {
 	}
 
 	public void process(final Connection connection, String line, String[] parts) {
+
+        MercuryEventBus.post(new ErrorEvent(connection,
+                "Error, nick: " + connection.getLocalUser().getName() + " is already in use."));
 		final String nick = connection.getLocalUser().getName() + "_";
 		Platform.runLater(new Runnable() {
 			@Override
@@ -23,6 +28,8 @@ public class NickInUse implements Connection.NumericHandler {
 
 		connection.getLocalUser().setName(nick);
 		connection.nick(nick);
+
+
 	}
 
 }

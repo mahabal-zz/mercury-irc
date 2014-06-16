@@ -1,5 +1,7 @@
 package com.mercuryirc.network.numerics;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.ConnectEvent;
 import com.mercuryirc.network.Connection;
 
 public class Welcome implements Connection.NumericHandler {
@@ -10,6 +12,6 @@ public class Welcome implements Connection.NumericHandler {
 	@Override
 	public void process(Connection connection, String line, String[] parts) {
 		connection.setRegistered(true);
-		connection.getCallback().onConnect(connection);
+        MercuryEventBus.post(new ConnectEvent(connection));
 	}
 }

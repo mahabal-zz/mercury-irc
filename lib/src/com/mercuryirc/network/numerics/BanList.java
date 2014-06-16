@@ -1,5 +1,7 @@
 package com.mercuryirc.network.numerics;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.ModeListEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Mode;
@@ -44,13 +46,13 @@ public class BanList implements Connection.NumericHandler {
 			}
 		} else switch (Integer.parseInt(parts[1])) {
 			case 368:
-				callback.onModeList(connection, channel, Mode.Type.BAN, channel.getBans());
+                MercuryEventBus.post(new ModeListEvent(connection, channel, Mode.Type.BAN, channel.getBans()));
 				break;
 			case 347:
-				callback.onModeList(connection, channel, Mode.Type.INVITE, channel.getInvites());
+                MercuryEventBus.post(new ModeListEvent(connection, channel, Mode.Type.INVITE, channel.getInvites()));
 				break;
 			case 349:
-				callback.onModeList(connection, channel, Mode.Type.EXCEPT, channel.getExcepts());
+                MercuryEventBus.post(new ModeListEvent(connection, channel, Mode.Type.EXCEPT, channel.getExcepts()));
 				break;
 		}
 	}

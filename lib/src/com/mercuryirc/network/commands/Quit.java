@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.QuitEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Server;
 import com.mercuryirc.model.User;
@@ -26,7 +28,7 @@ public class Quit implements Connection.CommandHandler {
 			reason = line.substring(line.indexOf(':', 1) + 1);
 		}
 
-		connection.getCallback().onQuit(connection, user, reason);
+        MercuryEventBus.post(new QuitEvent(connection, user, reason));
 		svr.removeUser(user);
 	}
 

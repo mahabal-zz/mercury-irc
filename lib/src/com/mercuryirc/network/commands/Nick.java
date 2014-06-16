@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.NicknameEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.User;
 import com.mercuryirc.network.Connection;
@@ -21,7 +23,7 @@ public class Nick implements Connection.CommandHandler {
 			newNick = newNick.substring(1);
 		final String _newNick = newNick;
 
-		User user;
+		final User user;
 		if (connection.getLocalUser().getName().equals(oldNick)) {
 			user = connection.getLocalUser();
 		} else {
@@ -32,7 +34,7 @@ public class Nick implements Connection.CommandHandler {
 			@Override
 			public void run() {
 				_user.setName(_newNick);
-				connection.getCallback().onNick(connection, _user, oldNick);
+                MercuryEventBus.post(new NicknameEvent(connection, _user, oldNick));
 			}
 		});
 	}

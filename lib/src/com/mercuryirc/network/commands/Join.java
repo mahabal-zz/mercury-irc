@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.received.JoinEvent;
+import com.mercuryirc.event.MercuryEventBus;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Server;
@@ -19,14 +21,14 @@ public class Join implements Connection.CommandHandler {
 		if(chName.startsWith(":"))
 			chName = chName.substring(1);
 
-		Server srv = connection.getServer();
+		final Server srv = connection.getServer();
 
-		String nick = IrcUtils.parseSource(parts[0]);
-		String username = parts[0].substring(parts[0].indexOf('!') + 1, parts[0].indexOf('@'));
-		String host = parts[0].substring(parts[0].indexOf('@') + 1);
+        final String nick = IrcUtils.parseSource(parts[0]);
+		final String username = parts[0].substring(parts[0].indexOf('!') + 1, parts[0].indexOf('@'));
+		final String host = parts[0].substring(parts[0].indexOf('@') + 1);
 
-		User user = srv.getUser(nick);
-		Channel channel = srv.getChannel(chName);
+		final User user = srv.getUser(nick);
+		final Channel channel = srv.getChannel(chName);
 
 		// update state
 		user.addChannel(channel);
@@ -41,7 +43,9 @@ public class Join implements Connection.CommandHandler {
 			connection.who(chName);
 		}
 
-		connection.getCallback().onJoin(connection, channel, user);
+        final JoinEvent event = new JoinEvent(connection, channel, user);
+        MercuryEventBus.post(event);
+
 	}
 
 }

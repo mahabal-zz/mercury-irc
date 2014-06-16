@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.ModeEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.Entity;
@@ -61,7 +63,7 @@ public class Mode implements Connection.CommandHandler {
 				}
 			}
 		}
-		connection.getCallback().onMode(connection, target, modes, add);
+        MercuryEventBus.post(new ModeEvent(connection, target, modes, add));
 	}
 
 }

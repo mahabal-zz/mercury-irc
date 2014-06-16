@@ -1,5 +1,7 @@
 package com.mercuryirc.network.numerics;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.JoinFailedEvent;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.network.Connection;
 
@@ -20,7 +22,7 @@ public class JoinError implements Connection.NumericHandler {
         String channelName = parts[3];
 
         Channel channel = new Channel(connection.getServer(), channelName);
-        connection.getCallback().onJoinError(connection, channel, reason);
+        MercuryEventBus.post(new JoinFailedEvent(connection, channel, reason));
     }
 
     private String formulateReason(String[] parts) {

@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.TopicEvent;
 import com.mercuryirc.misc.IrcUtils;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.network.Connection;
@@ -18,6 +20,7 @@ public class Topic implements Connection.CommandHandler {
 		channel.setTopic(topic);
 		channel.setTopicTimestamp(IrcUtils.getTimestamp());
 
-		connection.getCallback().onTopic(connection, channel, connection.getServer().getUser(who), topic);
+        MercuryEventBus.post(new TopicEvent(connection, channel, connection.getServer().getUser(who), topic));
+
 	}
 }
