@@ -191,17 +191,6 @@ public class EventHandler implements Callback {
 		});
 	}
 
-	@Override
-	public void onUnknownCommand(final Connection connection, final String command) {
-		Platform.runLater(new Runnable() {
-			@Override
-			public void run() {
-				Message message = new Message(null, null, "Unknown command: " + command);
-				appPane.getTabPane().addUntargetedMessage(connection, message, MessageRow.Type.ERROR);
-			}
-		});
-	}
-
 	@Subscribe
 	public void onMode(final ModeEvent e) {
 

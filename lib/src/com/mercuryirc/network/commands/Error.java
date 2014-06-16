@@ -1,5 +1,7 @@
 package com.mercuryirc.network.commands;
 
+import com.mercuryirc.event.MercuryEventBus;
+import com.mercuryirc.event.received.ErrorEvent;
 import com.mercuryirc.network.Connection;
 
 public class Error implements Connection.CommandHandler {
@@ -11,8 +13,7 @@ public class Error implements Connection.CommandHandler {
 
 	@Override
 	public void process(Connection connection, String line, String[] parts) {
-
-		connection.getCallback().onError(connection, line.substring(7));
+        MercuryEventBus.post(new ErrorEvent(connection, line.substring(7)));
 	}
 
 }
