@@ -1,7 +1,5 @@
 package com.mercuryirc.client.misc;
 
-import org.jruby.RubyProcess;
-
 import java.io.File;
 
 public class IoUtils {

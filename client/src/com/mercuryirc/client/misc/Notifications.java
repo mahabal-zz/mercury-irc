@@ -10,7 +10,6 @@ public class Notifications implements Constants {
     //TODO: Apple
 
 
-
     public static void dispatch(final String title, final String message) {
 
         switch (OperatingSystem.current()) {

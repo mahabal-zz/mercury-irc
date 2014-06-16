@@ -6,7 +6,7 @@ import com.mercuryirc.model.IrcType;
 import com.mercuryirc.model.User;
 import com.mercuryirc.network.Connection;
 
-public final class JoinEvent extends AbstractEvent{
+public final class JoinEvent extends AbstractEvent {
 
     //Can't be changed, so public. No need for getters.
     public final Channel channel;

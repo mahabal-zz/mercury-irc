@@ -1,6 +1,5 @@
 package com.mercuryirc.event.received;
 
-import com.mercuryirc.event.received.UserEvent;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.IrcType;
 import com.mercuryirc.model.User;

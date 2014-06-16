@@ -8,6 +8,7 @@ import com.mercuryirc.network.Connection;
 /**
  * An error that is raised when joining a channel fails.
  * Reasons a channel join can fail include: keywords, invite-only, bans.
+ *
  * @author rvbiljouw
  */
 public class JoinError implements Connection.NumericHandler {
@@ -27,9 +28,9 @@ public class JoinError implements Connection.NumericHandler {
 
     private String formulateReason(String[] parts) {
         StringBuilder reasonBuilder = new StringBuilder();
-        for(int index = 4; index < parts.length; index++) {
+        for (int index = 4; index < parts.length; index++) {
             reasonBuilder.append(parts[index]);
-            if(index + 1 < parts.length) {
+            if (index + 1 < parts.length) {
                 reasonBuilder.append(' ');
             }
         }

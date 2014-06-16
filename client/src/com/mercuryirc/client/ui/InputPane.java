@@ -22,7 +22,7 @@ import java.util.LinkedList;
 public class InputPane extends HBox {
 
     private final ApplicationPane appPane;
-	private final Connection connection;
+    private final Connection connection;
 
     private final Label nickLabel;
     private final TextField inputField;
@@ -32,7 +32,7 @@ public class InputPane extends HBox {
     public InputPane(ApplicationPane appPane, Connection connection) {
         super(0);
         this.appPane = appPane;
-		this.connection = connection;
+        this.connection = connection;
         getStylesheets().add(Mercury.class.getResource("/res/css/InputPane.css").toExternalForm());
         getStyleClass().add("dark-pane");
         setId("input-pane");
@@ -50,14 +50,14 @@ public class InputPane extends HBox {
         inputField.setMaxHeight(33);
         HBox.setHgrow(inputField, Priority.ALWAYS);
         nickLabel.setText(connection.getLocalUser().getName());
-		InputHandler inputHandler = new InputHandler();
+        InputHandler inputHandler = new InputHandler();
         inputField.setOnAction(inputHandler);
         inputField.setOnKeyPressed(new KeyHandler());
         Region spacer = new Region();
         spacer.setMinWidth(10);
         spacer.setMaxWidth(10);
         Button sendButton = FontAwesome.createIconButton(FontAwesome.REPLY, "send", true, "blue");
-		sendButton.setOnAction(inputHandler);
+        sendButton.setOnAction(inputHandler);
         getChildren().addAll(nickLabel, inputField, spacer, sendButton);
     }
 
@@ -65,9 +65,9 @@ public class InputPane extends HBox {
         nickLabel.setText(nick);
     }
 
-	public TextField getInputField() {
-		return inputField;
-	}
+    public TextField getInputField() {
+        return inputField;
+    }
 
     private class InputHandler implements EventHandler<ActionEvent> {
 
@@ -101,7 +101,7 @@ public class InputPane extends HBox {
                     keyEvent.consume();
                     break;
                 case DOWN:
-					if (messageHistoryIndex < 10 && messageHistoryIndex > -1) {
+                    if (messageHistoryIndex < 10 && messageHistoryIndex > -1) {
                         inputField.setText(messageHistoryIndex == messageHistory.size() - 1 ? "" : messageHistory.get(messageHistoryIndex < 9 && messageHistoryIndex > -1 ? ++messageHistoryIndex : messageHistoryIndex));
                     }
                     keyEvent.consume();

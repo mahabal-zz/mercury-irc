@@ -3,7 +3,6 @@ package com.mercuryirc.event.received;
 import com.mercuryirc.event.AbstractEvent;
 import com.mercuryirc.model.Channel;
 import com.mercuryirc.model.IrcType;
-import com.mercuryirc.model.Mode;
 import com.mercuryirc.model.User;
 import com.mercuryirc.network.Connection;
 

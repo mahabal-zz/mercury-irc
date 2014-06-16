@@ -10,33 +10,33 @@ import com.mercuryirc.network.Connection;
 
 public class Part implements Connection.CommandHandler {
 
-	public boolean applies(Connection connection, String command, String line) {
-		return command.equals("PART");
-	}
+    public boolean applies(Connection connection, String command, String line) {
+        return command.equals("PART");
+    }
 
-	public void process(Connection connection, String line, String[] parts) {
-		String chName = parts[2];
+    public void process(Connection connection, String line, String[] parts) {
+        String chName = parts[2];
 
-		Server srv = connection.getServer();
+        Server srv = connection.getServer();
 
-		String nick = IrcUtils.parseSource(parts[0]);
-		User user = srv.getUser(nick);
-		Channel channel = srv.getChannel(chName);
+        String nick = IrcUtils.parseSource(parts[0]);
+        User user = srv.getUser(nick);
+        Channel channel = srv.getChannel(chName);
 
-		user.removeChannel(channel);
-		channel.removeUser(user);
-		if (user.equals(connection.getLocalUser())) {
-			channel.clearData();
-		}
+        user.removeChannel(channel);
+        channel.removeUser(user);
+        if (user.equals(connection.getLocalUser())) {
+            channel.clearData();
+        }
 
-		String reason = null;
-		if(parts.length > 3 && parts[3].length() > 1)
-			reason = line.substring(line.indexOf(':', 1) + 1);
+        String reason = null;
+        if (parts.length > 3 && parts[3].length() > 1)
+            reason = line.substring(line.indexOf(':', 1) + 1);
 
         //Create the event
         final PartEvent evt = new PartEvent(connection, channel, user, reason);
         MercuryEventBus.post(evt);
 
-	}
+    }
 
 }

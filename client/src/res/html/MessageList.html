@@ -3,29 +3,28 @@
 <HEAD>
     <SCRIPT type="text/javascript">
 
-		function addRow(source, message, timestamp, style) {
-			var table = document.getElementById('messageTable');
-			var row = table.insertRow(table.rows.length);
-			row.className = style;
-			var sourceCell = row.insertCell(0);
-			sourceCell.className = "source";
-			alert(sourceCell.style.borderRight);
-			sourceCell.innerHTML = source;
-			var messageCell = row.insertCell(1);
-			messageCell.className = "message";
-			messageCell.innerHTML = message;
-			var timestampCell = row.insertCell(2);
-			timestampCell.className = "timestamp";
-			timestampCell.innerHTML = timestamp;
-			if (window.innerHeight > 10) {
-				window.scrollTo(0, document.body.scrollHeight);
-			}
-		}
+        function addRow(source, message, timestamp, style) {
+            var table = document.getElementById('messageTable');
+            var row = table.insertRow(table.rows.length);
+            row.className = style;
+            var sourceCell = row.insertCell(0);
+            sourceCell.className = "source";
+            alert(sourceCell.style.borderRight);
+            sourceCell.innerHTML = source;
+            var messageCell = row.insertCell(1);
+            messageCell.className = "message";
+            messageCell.innerHTML = message;
+            var timestampCell = row.insertCell(2);
+            timestampCell.className = "timestamp";
+            timestampCell.innerHTML = timestamp;
+            if (window.innerHeight > 10) {
+                window.scrollTo(0, document.body.scrollHeight);
+            }
+        }
 
-		function onLinkClick(url) {
-			panel.openUrl(url);
-		}
-
+        function onLinkClick(url) {
+            panel.openUrl(url);
+        }
 
 
     </SCRIPT>

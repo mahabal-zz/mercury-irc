@@ -11,61 +11,61 @@ import java.util.Properties;
 
 public class Settings {
 
-	private static final File APP_DIR;
-	private static final Properties properties;
+    private static final File APP_DIR;
+    private static final Properties properties;
 
-	static {
-		APP_DIR = new File(System.getProperty("user.home"), ".mercury");
-		properties = new Properties();
-		try {
-			File file = new File(APP_DIR, "settings.ini");
-			if (file.exists()) {
-				FileInputStream fileInput = new FileInputStream(file);
-				properties.load(fileInput);
-				fileInput.close();
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+    static {
+        APP_DIR = new File(System.getProperty("user.home"), ".mercury");
+        properties = new Properties();
+        try {
+            File file = new File(APP_DIR, "settings.ini");
+            if (file.exists()) {
+                FileInputStream fileInput = new FileInputStream(file);
+                properties.load(fileInput);
+                fileInput.close();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
-	public static void init() {
-		Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-			@Override
-			public void run() {
-				Stage stage = Mercury.getStage();
-				set("bounds", String.format("%s %s %s %s", stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight()));
-				Mercury.saveConnections();
-				save();
-			}
-		}));
-	}
+    public static void init() {
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Stage stage = Mercury.getStage();
+                set("bounds", String.format("%s %s %s %s", stage.getX(), stage.getY(), stage.getWidth(), stage.getHeight()));
+                Mercury.saveConnections();
+                save();
+            }
+        }));
+    }
 
-	public static String get(String key) {
-		return properties.getProperty(key);
-	}
+    public static String get(String key) {
+        return properties.getProperty(key);
+    }
 
-	public static void set(String key, String value) {
-		properties.setProperty(key, value);
-	}
+    public static void set(String key, String value) {
+        properties.setProperty(key, value);
+    }
 
-	public static void save() {
-		try {
-			File file = new File(APP_DIR, "settings.ini");
-			if (!APP_DIR.exists()) {
-				if (!APP_DIR.mkdir())
+    public static void save() {
+        try {
+            File file = new File(APP_DIR, "settings.ini");
+            if (!APP_DIR.exists()) {
+                if (!APP_DIR.mkdir())
                     System.err.println("Unable to create directory!");
-			}
+            }
             if (!file.exists()) {
                 if (!file.createNewFile())
                     System.err.println("Unable to create file!");
             }
-			FileOutputStream fileOutput = new FileOutputStream(file);
-			properties.store(fileOutput, "Mercury");
-			fileOutput.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+            FileOutputStream fileOutput = new FileOutputStream(file);
+            properties.store(fileOutput, "Mercury");
+            fileOutput.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

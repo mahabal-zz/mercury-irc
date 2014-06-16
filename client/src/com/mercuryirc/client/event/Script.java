@@ -6,10 +6,10 @@ import org.jruby.embed.ScriptingContainer;
 
 public class Script extends CallbackAdapter {
 
-	private final ScriptingContainer ruby;
+    private final ScriptingContainer ruby;
 
-	public Script(String name) {
-		this.ruby = new ScriptingContainer(LocalVariableBehavior.TRANSIENT);
-	}
+    public Script(String name) {
+        this.ruby = new ScriptingContainer(LocalVariableBehavior.TRANSIENT);
+    }
 
 }

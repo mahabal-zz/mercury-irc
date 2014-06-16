@@ -4,10 +4,10 @@ import javafx.beans.property.ReadOnlyStringProperty;
 
 public interface Entity {
 
-	public Server getServer();
+    public Server getServer();
 
-	public String getName();
+    public String getName();
 
-	public ReadOnlyStringProperty getNameProperty();
+    public ReadOnlyStringProperty getNameProperty();
 
 }

@@ -9,18 +9,18 @@ import com.mercuryirc.network.Connection;
 /**
  * Only send the list of nicks to the callback after the server has finished
  * sending all of them:
- *
+ * <p/>
  * :chat.server 366 Test|Mercury #Mercury :End of /NAMES list.
  */
 public class EndOfNamesList implements Connection.NumericHandler {
-	public boolean applies(Connection connection, int numeric) {
-		return numeric == 366;
-	}
+    public boolean applies(Connection connection, int numeric) {
+        return numeric == 366;
+    }
 
-	public void process(Connection connection, String line, String[] parts) {
-		Server srv = connection.getServer();
-		Channel channel = srv.getChannel(parts[3]);
+    public void process(Connection connection, String line, String[] parts) {
+        Server srv = connection.getServer();
+        Channel channel = srv.getChannel(parts[3]);
 
         MercuryEventBus.post(new NickListEvent(connection, channel, channel.getUsers()));
-	}
+    }
 }
