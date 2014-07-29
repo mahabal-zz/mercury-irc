@@ -97,6 +97,7 @@ public class Connection implements Runnable {
 
             writeLine("NICK " + localUser.getName());
             writeLine("USER " + localUser.getUserName() + " * * :" + localUser.getRealName());
+	        writeLine("PASS " + server.getPassword());
 
             new Thread(this).start();
         } catch (IOException e) {
