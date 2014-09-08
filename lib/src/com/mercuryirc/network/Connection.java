@@ -95,9 +95,11 @@ public class Connection implements Runnable {
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 
+            if (!server.getPassword().isEmpty())
+                writeLine("PASS " + server.getPassword());
             writeLine("NICK " + localUser.getName());
+            if (!server.getHost().endsWith("twitch.tv"))
             writeLine("USER " + localUser.getUserName() + " * * :" + localUser.getRealName());
-	        writeLine("PASS " + server.getPassword());
 
             new Thread(this).start();
         } catch (IOException e) {
