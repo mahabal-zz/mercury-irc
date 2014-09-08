@@ -124,7 +124,7 @@ public class User implements Entity {
 
     public Mode.Type getChannelRank(Channel channel) {
         Set<Mode.Type> ranks = channelRanks.get(channel);
-        if (ranks.size() > 0) {
+        if (ranks != null && ranks.size() > 0) {
             return ranks.iterator().next();
         } else {
             return null;
